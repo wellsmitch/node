@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>login</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/javascripts/xheditor/xheditor-1.2.2.min.js"></script>
+    <script type="text/javascript" src="/javascripts/xheditor/xheditor_lang/zh-cn.js"></script>
+    <script type="text/javascript" src="/javascripts/fwb.js"></script>
+</head>
+<body>
+    <h1>留言列表</h1>
+    <table>
+        <tr>
+            <th>标题</th>
+            <th>内容</th>
+        </tr>
+        <% list.map(function (item,i) {%>
+            <tr>
+                <td><%- i %></td>
+                <td>
+                    <a href="/liuyandetail?id=<%- item._id %>"><%- item.title %></a>
+                 </td>
+                <td><%- item.con %></td>
+            </tr>
+        <% }) %>
+    </table>
+
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li>
+                <a href="/liuyan?pageNum=<%- pageNum < 1 ? 1 : parseInt(pageNum) - 1 %>" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <% if(page > 4){ %>
+                <li><a href="/liuyan?pageNum=1">1</a></li>
+                <li><a href="/liuyan?pageNum=2">2</a></li>
+                <li><a href="#">...</a></li>
+                <li><a href="/liuyan?pageNum = <%- page-1 %>"><%- page-1 %></a></li>
+                <li><a href="/liuyan?pageNum = <%- page%>"><%- page%></a></li>
+            <%} else { %>
+                <% for(let i = 0;i<page;i++){ %>
+                    <li><a href="/liuyan?pageNum=<%-i+1 %>"><%-i+1 %></a></li>
+                <%}%>
+            <%}%>
+
+            <li>
+                <a href="/liuyan?pageNum=<%- pageNum > page ? page : parseInt(pageNum) + 1 %>" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+
+    <script type="text/javascript">
+    // $('#btn1').click(function () {
+    //     $.ajax({
+    //         type:'post',
+    //         url:'/users/login',
+    //         data:{
+    //             name:$('#user').val(),
+    //             pw:$('#pw').val()
+    //         },
+    //         success:function(data){
+    //             // console.log(data)
+    //             if(data==0){
+    //                 alert('登录失败')
+    //             }else if(data==1){
+    //                 alert('登录成功')
+    //                 location.href=  '/'
+    //             }else{
+    //                 alert('登录异常')
+    //             }
+    //         }
+    //     })
+    // })
+</script>
+</body>
+</html>

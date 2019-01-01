@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+  </head>
+  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>    <script type="text/javascript" src="/javascripts/xheditor/xheditor-1.2.2.min.js"></script>
+  <script type="text/javascript" src="/javascripts/xheditor/xheditor_lang/zh-cn.js"></script>
+  <!--npm i multiparty -D-->
+
+
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <% if(name){ %>
+      <h2>欢迎  <%- name %></h2>
+        <button onclick="location.href='/liuyan'" id="liuyan">留言</button>
+    <button onclick="location.href='/relogin'">注销</button>
+    <input type="text" name="" id="title" placeholder="留言">
+    <textarea name="content" class="xheditor" id="con">test</textarea>
+    <button>发布留言</button>
+    <%} else {%>
+      <button id="btn1" onclick="location.href='/login'">登录</button>
+      <button id="btn2" onclick="location.href='/register'">注册</button>
+    <% } %>
+    <h2><%- name%></h2>
+
+
+    <script type="text/javascript">
+  			$('#liuyan').click(function () {
+                $.ajax({
+                    type:'post',
+                    url:'/users/liuyan',
+                    data:{
+                        title:$('#title').val(),
+                        con:$('#con').val()
+                    },
+                    success:function(data){
+                        console.log(data)
+                    }
+                })
+            })
+  </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+</head>
+<body>
+<input type="text" class="ipt">
+<button id="btn">获取数据</button>
+
+<script type="text/javascript">
+    $('#btn').click(function () {
+        $.ajax({
+            type:'post',
+            data:{
+              str:$('.ipt').val()
+            },
+            url:'http://localhost:3000/',
+            // url:'https://api.douban.com/v2/movie/top250',
+            success:function(data){
+                console.log(JSON.parse(data))
+            }
+        })
+    })
+
+</script>
+</body>
+</html>

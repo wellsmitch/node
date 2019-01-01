@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>H5通信</h1>
+<div id="con" style="height: 500px;width: 500px;border: 1px silver solid">
+
+</div>
+<input type="text" id="ipt">
+<button id="btn">发送</button>
+
+<script type="text/javascript">
+    //客户端
+		var client = new WebSocket('ws://localhost:3001');
+    client.onopen = function () {
+
+    };
+
+    client.onmessage = function (a) {
+        console.log(a);
+        document.getElementById('con').innerHTML+=`<p>${a.data}</p>`
+    };
+
+    document.getElementById('btn').onclick = function (){
+        console.log('a');
+        client.send(document.getElementById('ipt').value)
+    };
+
+
+</script>
+</body>
+</html>
