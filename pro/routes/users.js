@@ -11,6 +11,16 @@ router.get('/', function(req, res, next) {
 //登录
 router.post('/login', function(req, res, next) {
     console.log(req.body);
+    // 是否允许发送Cookie，ture为运行
+    res.header("Access-Control-Allow-Credentials", true);
+    // 允许来自所有域名请求
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "x-requested-with");
+    // 设置所允许的HTTP请求方法
+    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+    res.header("X-Powered-By", ' 3.2.1');
+    res.header("Content-Type", "application/json;charset=utf-8");
+    // next();
     mongodb.connect(db_str,(err,database)=>{
         database.collection('user',(err,coll)=>{
             coll.find({name:req.body.name,pw:req.body.pw}).toArray((err,data)=>{
