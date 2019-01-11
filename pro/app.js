@@ -19,7 +19,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 //session  存储配置
 app.use(sesson({
@@ -28,9 +30,10 @@ app.use(sesson({
     resave:true,
     saveUninitialized:true
 }));
-
+app.use('/static', express.static('public'))//静态文件托管
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
