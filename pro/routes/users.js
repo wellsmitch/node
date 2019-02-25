@@ -41,6 +41,7 @@ router.post('/login', function(req, res, next) {
 
 //注册
 router.post('/register', function(req, res, next) {
+    // res.header("Access-Control-Allow-Origin", "*");
     console.log(req.body);
     mongodb.connect(db_str,(err,database)=>{
         database.collection('user',(err,coll)=>{
@@ -71,6 +72,36 @@ router.post('/liuyan', function(req, res, next) {
     })
 });
 
+// svg
+router.post('/svg', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    console.log(req.body);
+    mongodb.connect(db_str,(err,database)=>{
+        database.collection('svg',(err,coll)=>{
+            coll.remove({});
+            coll.insert(req.body,(err)=>{
+                res.send(req.body);
+                database.close()
+            })
+        })
+    })
+});
+
+// svg
+router.post('/svgpost', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    // console.log(req.body);
+    mongodb.connect(db_str,(err,database)=>{
+        database.collection('svg',(err,coll)=>{
+        
+            coll.find({}).toArray((err,data)=>{
+                res.send(data);
+                database.close()
+            })
+        })
+    })
+});
+
 //上传图片
 router.post('/pic', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -85,7 +116,6 @@ router.post('/pic', function(req, res, next) {
         for (var key in files) {
             var file = files[key];
             var fName = (new Date()).getTime();
-console.log(6666666666666666666666666666)
             switch (file.type) {
             case "image/jpeg":
                 fName = fName + ".jpeg";
