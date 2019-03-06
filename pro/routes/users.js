@@ -90,59 +90,57 @@ router.post('/svg', function(req, res, next) {
 // svg
 router.post('/svgpost', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
+    console.log(req.body)
     // console.log(req.body);
-    mongodb.connect(db_str,(err,database)=>{
-        database.collection('svg',(err,coll)=>{
+    // mongodb.connect(db_str,(err,database)=>{
+    //     database.collection('svg',(err,coll)=>{
         
-            coll.find({}).toArray((err,data)=>{
-                res.send(data);
-                database.close()
-            })
-        })
-    })
+    //         coll.find({}).toArray((err,data)=>{
+    //             res.send(data);
+    //             database.close()
+    //         })
+    //     })
+    // })
 });
 
 //上传图片
 router.post('/pic', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-    // res.header("Content-Type", "application/jpg;charset=utf-8");
-
-    // console.log(req)
-    var form = new formidable.IncomingForm();
-    form.uploadDir = "./public/upload/temp/"; //改变临时目录
-    // console.log(req)
-    form.parse(req, function(error, fields, files) {
-        for (var key in files) {
-            var file = files[key];
-            var fName = (new Date()).getTime();
-            switch (file.type) {
-            case "image/jpeg":
-                fName = fName + ".jpeg";
-                break;
-            case "image/jpg":
-                fName = fName + ".jpg";
-                break;    
-            case "image/png":
-                fName = fName + ".png";
-            break;
-            default:
-                fName = fName + ".png";
-            break;
-            }
-            console.log(file, file.size);
-            var uploadDir = "./public/upload/" + fName;
-            fs.rename(file.path, uploadDir, function(err) {
-                if (err) {
-                    res.write(err + "\n");
-                    res.end();
-                }
-        //res.write("upload image:<br/>");
-                res.write("<img src='/upload/" + fName + "' />");
-                res.end();
-            })
-        }
-    });
+    console.log(req.file)
+    // var _files = req.files.pics;
+	// var item ,_name ,_tmp;
+	// item = _files, _name=item.name;
+	// if (_name && item.path) {//这里需要判断文件名称和路径是否为空
+	// 	var tmpPath = item.path, type = item.type ,extension_name = '',
+	// 	tmp_name = (Date.parse(new Date()) / 1000) + '' + (Math.round(Math.random() * 9999));//生成随机名称
+	// 	switch (type) {	//判断文件类型
+	// 		case 'image/pjpeg': extension_name = 'jpg';  break;
+	// 		case 'image/jpeg': extension_name = 'jpg'; break;
+	// 		case 'image/gif': extension_name = 'gif'; break;
+	// 		case 'image/png': extension_name = 'png'; break;
+	// 		case 'image/x-png': extension_name = 'png'; break;
+	// 		case 'image/bmp': extension_name = 'bmp'; break;
+	// 		default: if(_name.indexOf('.')<=0) return;//其他文件则默认上传
+	// 			else {
+	// 				_tmp = _name.split('.');
+	// 				extension_name = _tmp[_tmp.length-1]; break;
+	// 		}
+	// 	}
+	// 	tmp_name = tmp_name + '.' + extension_name,
+	// 	targetPath = 'public/upload/' + tmp_name,//设置上传路径
+	// 	is = fs.createReadStream(tmpPath),
+	// 	os = fs.createWriteStream(targetPath);
+	// 	util.pump(is, os, function() { 
+	// 		fs.unlinkSync(tmpPath); 
+    //         console.log('upload success : ',targetPath);
+	// 		res.json({//设置返回值
+	// 			error : 0,
+	// 			url : 'upload/' + tmp_name,
+	// 			title : tmp_name,
+	// 			message : tmp_name
+	// 		});
+	// 	});
+	// };
 });
 
 
