@@ -91,16 +91,16 @@ router.post('/svg', function(req, res, next) {
 router.post('/svgpost', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     console.log(req.body)
-    // console.log(req.body);
-    // mongodb.connect(db_str,(err,database)=>{
-    //     database.collection('svg',(err,coll)=>{
+    console.log(req.body);
+    mongodb.connect(db_str,(err,database)=>{
+        database.collection('svg',(err,coll)=>{
         
-    //         coll.find({}).toArray((err,data)=>{
-    //             res.send(data);
-    //             database.close()
-    //         })
-    //     })
-    // })
+            coll.find({}).toArray((err,data)=>{
+                res.send(data);
+                database.close()
+            })
+        })
+    })
 });
 
 //上传图片
