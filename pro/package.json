@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "connect-multiparty": "^2.2.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
@@ -15,10 +16,13 @@
   },
   "devDependencies": {
     "async": "^2.6.1",
+    "body-parser": "^1.19.0",
+    "express-formidable": "^1.2.0",
     "express-session": "^1.15.6",
     "formidable": "^1.2.1",
     "install": "^0.12.2",
     "mongodb": "^2.2.36",
+    "multer": "^1.4.1",
     "multiparty": "^4.2.1"
   }
 }

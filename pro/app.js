@@ -19,9 +19,20 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'uploads')));//
+//增加根路径uploads /  -> uploads/
+// http://192.168.8.245:3000/9544c00df4c7db5c7f8639bcd42387b5.jpg
 
 
+// var bodyParser = require('body-parser');
+// var multiparty = require('multiparty');
+// // app.use(bodyParser.json());//数据JSON类型
+// app.use(bodyParser.urlencoded({ extended: false }));//解析post请求数据
+
+
+// const formidableMiddleware = require('express-formidable');
+// app.use(formidableMiddleware());
 
 //session  存储配置
 app.use(sesson({
@@ -30,7 +41,7 @@ app.use(sesson({
     resave:true,
     saveUninitialized:true
 }));
-app.use('/static', express.static('public'))//静态文件托管
+app.use('/static', express.static('public'));//静态文件托管
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
