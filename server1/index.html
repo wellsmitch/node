@@ -9,7 +9,10 @@
 
 <script type="text/javascript">
 		$.ajax({
-		    type:'get',
+			type:'get',
+			headers: {
+				a: 45789	
+			},
 		    url:'http://localhost:3000/',
 		    success:function(data){
                 console.log(data)

@@ -2,23 +2,45 @@
 <html>
 <head>
     <title>login</title>
-    <link rel='stylesheet' href='../public/stylesheets/style.css' />
+    <link rel='stylesheet' href='stylesheets/style.css' />
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 </head>
 <body>
+    <p>2163456423423</p>
     <h1>登录</h1>
     <input type="text" id="user" placeholder="用户名">
     <input type="password" id="pw" placeholder="密码">
+    <input type="file" id="fi">
     <button id="btn1">登录</button>
     <button onclick="location.href='/register'">注册</button>
 <script type="text/javascript">
+var fm = new FormData();
+
     $('#btn1').click(function () {
+
+        fm.append('name', $('#user').val())
+fm.append('pw', $('#pw').val())
+console.log(document.querySelector('#fi').files[0])
+// fm.append('avatar',document.querySelector('#fi').files[0]);
         $.ajax({
             type:'post',
             url:'/users/login',
-            data:{
-                name:$('#user').val(),
-                pw:$('#pw').val()
+            // headers: {
+            //     aa: 123456
+            // },
+            data:fm,
+            // {
+            //     name:$('#user').val(),
+            //     pw:$('#pw').val()
+            // },
+             xhr: function() {
+                var myXhr = $.ajaxSettings.xhr()
+                if(myXhr.upload) {
+                    myXhr.upload.addEventListener('progress', function (e) {
+                        console.log(e)
+                    }, false)
+                }
+                return myXhr
             },
             success:function(data){
                 // console.log(data)

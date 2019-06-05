@@ -7,6 +7,8 @@ var async = require('async');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    
     res.render('index', { title: 'Express',name:req.session.namee});
 });
 

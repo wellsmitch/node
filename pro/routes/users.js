@@ -23,19 +23,22 @@ router.get('/', function(req, res, next) {
 //upload.single相关网站  https://www.jb51.net/article/95488.htm
 router.post('/login', upload.array('avatar'), function(req, res, next) {
     // upload.array('avatar') 支持单个input -> file 多文件上传
+console.log(req)
+//     // 允许来自所有域名请求
+    res.header("Access-Control-Allow-Origin", "*");
 
     // 是否允许发送Cookie，ture为运行
     res.header("Access-Control-Allow-Credentials", true);
-//     // 允许来自所有域名请求
-    res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", "content-type");
-// //   // 设置所允许的HTTP请求方法
+
+    res.header("Access-Control-Allow-Headers","Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
+//   // 设置所允许的HTTP请求方法
     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-//      res.header("X-Powered-By", ' 3.2.1');
+     res.header("X-Powered-By", ' 3.2.1');
 //      res.header("Content-Type", "application/json;charset=utf-8");
-    // next();
+
     console.log('in receive');
-    console.log(req);
+    // console.log(req.headers)
+    // console.log(req);
     // if(req.file){
     //     var typearr  = req.file.originalname.split('.');
     //     var oldpath = './uploads/' + req.file.filename;
@@ -64,8 +67,16 @@ router.post('/login', upload.array('avatar'), function(req, res, next) {
 
 //注册
 router.post('/register', function(req, res, next) {
-    // res.header("Access-Control-Allow-Origin", "*");
-    console.log(req.body);
+    res.header("Access-Control-Allow-Origin", "*");
+
+    // 是否允许发送Cookie，ture为运行
+    res.header("Access-Control-Allow-Credentials", true);
+
+    res.header("Access-Control-Allow-Headers","Content-Type,Content-Length, Authorization, Accept,X-Requested-With,token");
+//   // 设置所允许的HTTP请求方法
+    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+    //  res.header("X-Powered-By", ' 3.2.1');
+    console.log(req);
     mongodb.connect(db_str,(err,database)=>{
         database.collection('user',(err,coll)=>{
             coll.find({name:req.body.name}).toArray((err,data)=>{
